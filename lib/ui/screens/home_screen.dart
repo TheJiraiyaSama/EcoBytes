@@ -3,12 +3,10 @@ import 'package:ecobytes/ui/screens/cart_page.dart';
 import 'package:ecobytes/ui/screens/explore_page.dart';
 import 'package:ecobytes/ui/screens/profile_page.dart';
 import 'package:ecobytes/ui/screens/services.dart';
-//import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
-//import 'package:flutter_iconly/flutter_iconly.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -35,28 +33,30 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: const Color(0xff99A78E),
       key: _scaffoldKey,
-      appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: const Color(0xf99A78E),
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(20),
-          ),
-        ),
-        title: Column(
-          children: [
-            Text(
-              "EcoBytes",
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'Hanken Grotesk',
-                  fontSize: 30),
-            ),
-            Text("Identify Plants!",
-                style: Theme.of(context).textTheme.bodySmall)
-          ],
-        ),
-      ),
+      appBar: _bottomNavIndex == 0 // Show app bar only for the ExplorePage
+          ? AppBar(
+              centerTitle: true,
+              backgroundColor: const Color(0xf99A78E),
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.vertical(
+                  bottom: Radius.circular(20),
+                ),
+              ),
+              title: Column(
+                children: [
+                  Text(
+                    "EcoBytes",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Hanken Grotesk',
+                        fontSize: 30),
+                  ),
+                  Text("Identify Plants!",
+                      style: Theme.of(context).textTheme.bodyLarge)
+                ],
+              ),
+            )
+          : null, // Hide app bar for other pages
       body: pages[_bottomNavIndex],
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: AnimatedBottomNavigationBar(
