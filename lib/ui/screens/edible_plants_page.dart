@@ -51,15 +51,63 @@ class _EdiblePlantsPageState extends State<EdiblePlantsPage> {
               itemCount: snapshot.data!.length,
               itemBuilder: (context, index) {
                 return ListTile(
-                  title:
-                      Text(snapshot.data![index]['common_name'] ?? 'Unknown'),
+                  title: Text(snapshot.data![index]['common_name'] ?? 'Unknown',
+                      style: TextStyle(fontFamily: 'Hanken Grotesk')),
                   subtitle: Text(
-                      snapshot.data![index]['scientific_name'] ?? 'Unknown'),
+                      snapshot.data![index]['scientific_name'] ?? 'Unknown',
+                      style: TextStyle(fontFamily: 'Hanken Grotesk')),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            PlantDetailsPage(plant: snapshot.data![index]),
+                      ),
+                    );
+                  },
                 );
               },
             );
           }
         },
+      ),
+    );
+  }
+}
+
+class PlantDetailsPage extends StatelessWidget {
+  final dynamic plant;
+
+  const PlantDetailsPage({super.key, required this.plant});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(plant['common_name'] ?? 'Unknown'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Scientific Name: ${plant['scientific_name'] ?? 'Unknown'}',
+              style: TextStyle(fontSize: 18, fontFamily: 'Hanken Grotesk'),
+            ),
+            SizedBox(height: 16),
+            Text(
+              'Family: ${plant['family'] ?? 'Unknown'}',
+              style: TextStyle(fontSize: 18, fontFamily: 'Hanken Grotesk'),
+            ),
+            SizedBox(height: 16),
+            Text(
+              'Edible?: ${plant['edible'] ?? 'Unknown'}',
+              style: TextStyle(fontSize: 18, fontFamily: 'Hanken Grotesk'),
+            ),
+            // Add more details as needed
+          ],
+        ),
       ),
     );
   }

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class NonEdiblePlantsPage extends StatefulWidget {
-  const NonEdiblePlantsPage({Key? key}) : super(key: key);
+  const NonEdiblePlantsPage({super.key});
 
   @override
   _NonEdiblePlantsPageState createState() => _NonEdiblePlantsPageState();

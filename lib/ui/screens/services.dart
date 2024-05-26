@@ -20,7 +20,7 @@ class _ServicesPageState extends State<ServicesPage> {
   List<CameraDescription>? cameras;
   bool _isCameraInitialized = false;
   Map<String, dynamic>? plantIdentificationResults;
-  File? _imageFile;  // Variable to hold the image file
+  File? _imageFile; // Variable to hold the image file
 
   @override
   void initState() {
@@ -170,11 +170,11 @@ class _ServicesPageState extends State<ServicesPage> {
     try {
       final bytes = await imageFile.readAsBytes();
       final url = Uri.parse(
-          'https://my-api.plantnet.org/v2/identify/all?include-related-images=false&no-reject=false&lang=en&type=kt&api-key=2b10MQsAHcLTbekrTjhGz7L4e',);
+        'https://my-api.plantnet.org/v2/identify/all?include-related-images=false&no-reject=false&lang=en&type=kt&api-key=2b10MQsAHcLTbekrTjhGz7L4e',
+      );
       final request = http.MultipartRequest("POST", url);
 
       request.fields["organs"] = type;
-
 
       request.files.add(
         await http.MultipartFile.fromPath(
@@ -198,7 +198,9 @@ class _ServicesPageState extends State<ServicesPage> {
         });
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(body["message"].toString() ?? 'Error identifying plant')),
+          SnackBar(
+              content: Text(
+                  body["message"].toString() ?? 'Error identifying plant')),
         );
       }
     } catch (e) {
