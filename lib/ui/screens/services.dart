@@ -6,7 +6,7 @@ import 'package:path/path.dart' as path;
 import 'package:permission_handler/permission_handler.dart';
 
 class ServicesPage extends StatefulWidget {
-  const ServicesPage({super.key});
+  const ServicesPage({Key? key}) : super(key: key);
 
   @override
   _ServicesPageState createState() => _ServicesPageState();
@@ -20,7 +20,17 @@ class _ServicesPageState extends State<ServicesPage> {
   @override
   void initState() {
     super.initState();
+    _requestPermissions(); // Request permissions when widget initializes
     _initializeCamera();
+  }
+
+  // Method to request necessary permissions
+  Future<void> _requestPermissions() async {
+    // Request camera and storage permissions
+    await [
+      Permission.camera,
+      Permission.storage,
+    ].request();
   }
 
   Future<void> _initializeCamera() async {
