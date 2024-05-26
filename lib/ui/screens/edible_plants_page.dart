@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class EdiblePlantsPage extends StatefulWidget {
-  const EdiblePlantsPage({Key? key}) : super(key: key);
+  const EdiblePlantsPage({super.key});
 
   @override
   _EdiblePlantsPageState createState() => _EdiblePlantsPageState();
