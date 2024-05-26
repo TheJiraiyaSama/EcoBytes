@@ -12,8 +12,8 @@ class WeatherService extends StatefulWidget {
 class _WeatherServiceState extends State<WeatherService> {
   final String apiKey = 'e0054952eafd8f9ffd4b28c9c6902c28';
   final String city = 'Bangalore';
-  late String _weatherDescription;
-  late double _temperature;
+  String? _weatherDescription;
+  double? _temperature;
 
   @override
   void initState() {
@@ -42,24 +42,37 @@ class _WeatherServiceState extends State<WeatherService> {
       backgroundColor: Color(0xff99A78E),
       body: Center(
         child: _weatherDescription != null && _temperature != null
-            ? Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Weather in $city:',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ? Card(
+                elevation: 4,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                margin: EdgeInsets.all(20),
+                child: Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        'Weather in $city:',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(height: 20),
+                      Text(
+                        'Temperature: $_temperature°C',
+                        style: TextStyle(fontSize: 18),
+                      ),
+                      SizedBox(height: 10),
+                      Text(
+                        'Description: $_weatherDescription',
+                        style: TextStyle(fontSize: 18),
+                      ),
+                    ],
                   ),
-                  SizedBox(height: 20),
-                  Text(
-                    'Temperature: $_temperature°C',
-                    style: TextStyle(fontSize: 18),
-                  ),
-                  SizedBox(height: 10),
-                  Text(
-                    'Description: $_weatherDescription',
-                    style: TextStyle(fontSize: 18),
-                  ),
-                ],
+                ),
               )
             : CircularProgressIndicator(), // Show loading indicator while fetching data
       ),
