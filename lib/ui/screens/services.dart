@@ -20,7 +20,7 @@ class _ServicesPageState extends State<ServicesPage> {
   List<CameraDescription>? cameras;
   bool _isCameraInitialized = false;
   Map<String, dynamic>? plantIdentificationResults;
-  File? _imageFile;  // Variable to hold the image file
+  File? _imageFile; // Variable to hold the image file
 
   @override
   void initState() {
@@ -34,7 +34,7 @@ class _ServicesPageState extends State<ServicesPage> {
     // Request camera and storage permissions
     await [
       Permission.camera,
-      Permission.storage,
+      Permission.photos,
     ].request();
   }
 
@@ -97,37 +97,14 @@ class _ServicesPageState extends State<ServicesPage> {
         // Log the image path
         print('Captured image path: ${image.path}');
 
-        // Ensure storage permission is granted
-        // After android 13 use granular permissions
         PermissionStatus status = await Permission.photos.request();
-        // REMOVE THIS STORAGE
-        if (status.isGranted) {
-          // Save the image in the "EcoBytes" folder
-          await _saveImage(image.path);
 
           // Identify plant
           if (image != null) {
             await _identifyPlant(image, type);
           }
-        } else if (status.isDenied) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Storage permission denied')),
-          );
-        } else if (status.isPermanentlyDenied) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(
-                  'Storage permission permanently denied. Please enable it from the app settings.'),
-              action: SnackBarAction(
-                label: 'Settings',
-                onPressed: () {
-                  openAppSettings();
-                },
-              ),
-            ),
-          );
-        }
-      } catch (e) {
+        } 
+        catch (e) {
         print('Error capturing image: $e');
       }
     }
@@ -170,11 +147,11 @@ class _ServicesPageState extends State<ServicesPage> {
     try {
       final bytes = await imageFile.readAsBytes();
       final url = Uri.parse(
-          'https://my-api.plantnet.org/v2/identify/all?include-related-images=false&no-reject=false&lang=en&type=kt&api-key=2b10MQsAHcLTbekrTjhGz7L4e',);
+        'https://my-api.plantnet.org/v2/identify/all?include-related-images=false&no-reject=false&lang=en&type=kt&api-key=2b10MQsAHcLTbekrTjhGz7L4e',
+      );
       final request = http.MultipartRequest("POST", url);
 
       request.fields["organs"] = type;
-
 
       request.files.add(
         await http.MultipartFile.fromPath(
@@ -198,7 +175,9 @@ class _ServicesPageState extends State<ServicesPage> {
         });
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(body["message"].toString() ?? 'Error identifying plant')),
+          SnackBar(
+              content: Text(
+                  body["message"].toString() ?? 'Error identifying plant')),
         );
       }
     } catch (e) {
