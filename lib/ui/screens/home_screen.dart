@@ -1,5 +1,5 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
-import 'package:ecobytes/ui/screens/cart_page.dart';
+import 'package:ecobytes/ui/screens/weather.dart';
 import 'package:ecobytes/ui/screens/explore_page.dart';
 import 'package:ecobytes/ui/screens/profile_page.dart';
 import 'package:ecobytes/ui/screens/services.dart';
@@ -17,7 +17,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final pages = [
     const ExplorePage(),
     const ServicesPage(),
-    const CartPage(),
+    const WeatherService(),
     const ProfilePage()
   ];
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
