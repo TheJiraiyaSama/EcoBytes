@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 
 class WeatherService extends StatefulWidget {
-  const WeatherService({Key? key}) : super(key: key);
+  const WeatherService({super.key});
 
   @override
   State<WeatherService> createState() => _WeatherServiceState();
@@ -41,9 +41,9 @@ class _WeatherServiceState extends State<WeatherService> {
   }
 
   Future<void> _fetchAirQuality() async {
-    const String apikey =
+    final String apikey =
         '8c0119bfbd1a6fe40cd2b3d7cb697273df820148'; // Replace 'YOUR_API_KEY' with your actual API key
-    const String city =
+    final String city =
         'Bangalore'; // Replace 'Bangalore' with your desired city
 
     final response = await http
@@ -51,13 +51,10 @@ class _WeatherServiceState extends State<WeatherService> {
 
     if (response.statusCode == 200) {
       final Map<String, dynamic> data = json.decode(response.body);
-      print('Air quality data: $data'); // Add debug print
       setState(() {
         _airQualityIndex = data['data']['aqi'];
       });
     } else {
-      print(
-          'Failed to load air quality data: ${response.statusCode}'); // Add debug print
       throw Exception('Failed to load air quality data');
     }
   }
