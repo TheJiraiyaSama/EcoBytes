@@ -3,6 +3,7 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as path;
+import 'package:permission_handler/permission_handler.dart';
 
 class ServicesPage extends StatefulWidget {
   const ServicesPage({super.key});
@@ -78,14 +79,33 @@ class _ServicesPageState extends State<ServicesPage> {
       try {
         final image = await _controller!.takePicture();
 
-        // Get the directory to save the new image
-        final directory = await getExternalStorageDirectory();
-        final newImagePath = path.join(directory!.path, 'Scama.jpg');
+        // Ensure storage permission is granted
+        PermissionStatus status = await Permission.storage.request();
+        if (status.isGranted) {
+          // Get the directory to save the new image
+          final directory = await getExternalStorageDirectory();
+          final newImagePath = path.join(directory!.path, 'Pictures', 'Scama.jpg');
 
-        // Copy the image to the new path with the new name
-        final newImage = await File(image.path).copy(newImagePath);
+          // Create the Pictures directory if it doesn't exist
+          final picturesDir = Directory(path.join(directory.path, 'Pictures'));
+          if (!await picturesDir.exists()) {
+            await picturesDir.create(recursive: true);
+          }
 
-        print('$type picture saved at ${newImage.path}');
+          // Copy the image to the new path with the new name
+          final newImage = await File(image.path).copy(newImagePath);
+
+          // Notify user about the saved picture
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('$type picture saved at ${newImage.path}')),
+          );
+
+          print('$type picture saved at ${newImage.path}');
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Storage permission denied')),
+          );
+        }
       } catch (e) {
         print('Error capturing image: $e');
       }
