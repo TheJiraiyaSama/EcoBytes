@@ -58,7 +58,8 @@ class _ServicesPageState extends State<ServicesPage> {
                     padding: const EdgeInsets.all(16.0),
                     child: FloatingActionButton(
                       onPressed: () async {
-                        if (_controller != null && _controller!.value.isInitialized) {
+                        if (_controller != null &&
+                            _controller!.value.isInitialized) {
                           try {
                             final image = await _controller!.takePicture();
                             // Handle the captured image, e.g., display it or save it
