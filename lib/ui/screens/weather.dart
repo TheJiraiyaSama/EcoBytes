@@ -10,7 +10,6 @@ class WeatherService extends StatefulWidget {
 }
 
 class _WeatherServiceState extends State<WeatherService> {
-  // Add your OpenWeatherMap API key here
   final String apiKey = 'e0054952eafd8f9ffd4b28c9c6902c28';
   final String city = 'Bangalore';
   late String _weatherDescription;
