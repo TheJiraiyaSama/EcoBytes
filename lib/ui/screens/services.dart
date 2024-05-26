@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as path;
 import 'package:permission_handler/permission_handler.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class ServicesPage extends StatefulWidget {
-  const ServicesPage({Key? key}) : super(key: key);
+  const ServicesPage({super.key});
 
   @override
   _ServicesPageState createState() => _ServicesPageState();
@@ -16,6 +18,8 @@ class _ServicesPageState extends State<ServicesPage> {
   CameraController? _controller;
   List<CameraDescription>? cameras;
   bool _isCameraInitialized = false;
+  Map<String, dynamic>? plantIdentificationResults;
+  File? _imageFile;  // Variable to hold the image file
 
   @override
   void initState() {
@@ -66,14 +70,14 @@ class _ServicesPageState extends State<ServicesPage> {
                   child: Text('Flower'),
                   onPressed: () {
                     Navigator.of(context).pop();
-                    _takePicture('Flower');
+                    _takePicture('flower');
                   },
                 ),
                 TextButton(
                   child: Text('Leaf'),
                   onPressed: () {
                     Navigator.of(context).pop();
-                    _takePicture('Leaf');
+                    _takePicture('leaf');
                   },
                 ),
               ],
@@ -89,37 +93,135 @@ class _ServicesPageState extends State<ServicesPage> {
       try {
         final image = await _controller!.takePicture();
 
+        // Log the image path
+        print('Captured image path: ${image.path}');
+
         // Ensure storage permission is granted
         PermissionStatus status = await Permission.storage.request();
         if (status.isGranted) {
-          // Get the directory to save the new image
-          final directory = await getExternalStorageDirectory();
-          final newImagePath = path.join(directory!.path, 'Pictures', 'Scama.jpg');
+          // Save the image in the "EcoBytes" folder
+          await _saveImage(image.path);
 
-          // Create the Pictures directory if it doesn't exist
-          final picturesDir = Directory(path.join(directory.path, 'Pictures'));
-          if (!await picturesDir.exists()) {
-            await picturesDir.create(recursive: true);
+          // Identify plant
+          if (_imageFile != null) {
+            await _identifyPlant(_imageFile!, type);
           }
-
-          // Copy the image to the new path with the new name
-          final newImage = await File(image.path).copy(newImagePath);
-
-          // Notify user about the saved picture
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('$type picture saved at ${newImage.path}')),
-          );
-
-          print('$type picture saved at ${newImage.path}');
-        } else {
+        } else if (status.isDenied) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Storage permission denied')),
+          );
+        } else if (status.isPermanentlyDenied) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(
+                  'Storage permission permanently denied. Please enable it from the app settings.'),
+              action: SnackBarAction(
+                label: 'Settings',
+                onPressed: () {
+                  openAppSettings();
+                },
+              ),
+            ),
           );
         }
       } catch (e) {
         print('Error capturing image: $e');
       }
     }
+  }
+
+  Future<void> _saveImage(String imagePath) async {
+    try {
+      final directory = await getExternalStorageDirectory();
+      if (directory == null) {
+        print('Error: Unable to get external storage directory');
+        return;
+      }
+
+      // Define the new path with the "EcoBytes" directory
+      final ecoBytesDirPath = path.join(directory.path, 'EcoBytes');
+      final newImagePath = path.join(ecoBytesDirPath, 'Scama.jpg');
+
+      // Create the "EcoBytes" directory if it doesn't exist
+      final ecoBytesDir = Directory(ecoBytesDirPath);
+      if (!await ecoBytesDir.exists()) {
+        await ecoBytesDir.create(recursive: true);
+      }
+
+      // Copy the image to the new path with the new name
+      _imageFile = await File(imagePath).copy(newImagePath);
+
+      // Log the new image path
+      print('New image path: ${_imageFile!.path}');
+
+      // Notify user about the saved picture
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Picture saved at ${_imageFile!.path}')),
+      );
+    } catch (e) {
+      print('Error saving image: $e');
+    }
+  }
+
+  Future<void> _identifyPlant(File imageFile, String type) async {
+    try {
+      final bytes = await imageFile.readAsBytes();
+      final response = await http.post(
+        Uri.parse(
+            'https://my-api.plantnet.org/v2/identify/all?api-key=2b10MQsAHcLTbekrTjhGz7L4e'),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode({
+          "organs": [type],
+          "images": [
+            {"file": base64Encode(bytes)}
+          ]
+        }),
+      );
+
+      print('API response status: ${response.statusCode}');
+      print('API response body: ${response.body}');
+
+      if (response.statusCode == 200) {
+        final jsonResponse = json.decode(response.body);
+        setState(() {
+          plantIdentificationResults = jsonResponse;
+        });
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error identifying plant')),
+        );
+      }
+    } catch (e) {
+      print('Error identifying plant: $e');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error identifying plant: $e')),
+      );
+    }
+  }
+
+  Widget _buildPlantIdentificationResults() {
+    if (plantIdentificationResults == null) {
+      return Text('No results yet.');
+    }
+
+    List results = plantIdentificationResults!['results'];
+    if (results == null || results.isEmpty) {
+      return Text('No plant identified.');
+    }
+
+    return ListView.builder(
+      shrinkWrap: true,
+      itemCount: results.length,
+      itemBuilder: (context, index) {
+        var plant = results[index]['species'];
+        return ListTile(
+          title: Text(plant['scientificNameWithoutAuthor'] ?? 'Unknown'),
+          subtitle: Text(plant['commonNames']?.join(', ') ?? 'No common names'),
+        );
+      },
+    );
   }
 
   @override
@@ -140,9 +242,16 @@ class _ServicesPageState extends State<ServicesPage> {
                   alignment: Alignment.bottomCenter,
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),
-                    child: FloatingActionButton(
-                      onPressed: _showPictureOptionsDialog,
-                      child: Icon(Icons.camera),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        FloatingActionButton(
+                          onPressed: _showPictureOptionsDialog,
+                          child: Icon(Icons.camera),
+                        ),
+                        SizedBox(height: 20),
+                        _buildPlantIdentificationResults(),
+                      ],
                     ),
                   ),
                 ),
