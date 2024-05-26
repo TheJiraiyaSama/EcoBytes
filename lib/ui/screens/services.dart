@@ -5,6 +5,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as path;
 import 'package:permission_handler/permission_handler.dart';
 import 'package:http/http.dart' as http;
+import 'package:http_parser/http_parser.dart' as parser;
 import 'dart:convert';
 
 class ServicesPage extends StatefulWidget {
@@ -97,14 +98,16 @@ class _ServicesPageState extends State<ServicesPage> {
         print('Captured image path: ${image.path}');
 
         // Ensure storage permission is granted
-        PermissionStatus status = await Permission.storage.request();
+        // After android 13 use granular permissions
+        PermissionStatus status = await Permission.photos.request();
+        // REMOVE THIS STORAGE
         if (status.isGranted) {
           // Save the image in the "EcoBytes" folder
           await _saveImage(image.path);
 
           // Identify plant
-          if (_imageFile != null) {
-            await _identifyPlant(_imageFile!, type);
+          if (image != null) {
+            await _identifyPlant(image, type);
           }
         } else if (status.isDenied) {
           ScaffoldMessenger.of(context).showSnackBar(
@@ -163,34 +166,39 @@ class _ServicesPageState extends State<ServicesPage> {
     }
   }
 
-  Future<void> _identifyPlant(File imageFile, String type) async {
+  Future<void> _identifyPlant(XFile imageFile, String type) async {
     try {
       final bytes = await imageFile.readAsBytes();
-      final response = await http.post(
-        Uri.parse(
-            'https://my-api.plantnet.org/v2/identify/all?api-key=2b10MQsAHcLTbekrTjhGz7L4e'),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: jsonEncode({
-          "organs": [type],
-          "images": [
-            {"file": base64Encode(bytes)}
-          ]
-        }),
+      final url = Uri.parse(
+          'https://my-api.plantnet.org/v2/identify/all?include-related-images=false&no-reject=false&lang=en&type=kt&api-key=2b10MQsAHcLTbekrTjhGz7L4e',);
+      final request = http.MultipartRequest("POST", url);
+
+      request.fields["organs"] = type;
+
+
+      request.files.add(
+        await http.MultipartFile.fromPath(
+          'images',
+          imageFile.path,
+          contentType: parser.MediaType('image', 'jpeg'),
+        ),
       );
 
-      print('API response status: ${response.statusCode}');
-      print('API response body: ${response.body}');
+      final response = await request.send();
+
+      final data = await response.stream.first;
+
+      final body = json.decode(utf8.decode(data));
+
+      print(body);
 
       if (response.statusCode == 200) {
-        final jsonResponse = json.decode(response.body);
         setState(() {
-          plantIdentificationResults = jsonResponse;
+          plantIdentificationResults = body;
         });
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error identifying plant')),
+          SnackBar(content: Text(body["message"].toString() ?? 'Error identifying plant')),
         );
       }
     } catch (e) {
