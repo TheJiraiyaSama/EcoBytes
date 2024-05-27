@@ -37,8 +37,8 @@ mixin _$PlantDetail {
   String? get familyCommonName => throw _privateConstructorUsedError;
   @JsonKey(name: 'genus_id')
   int get genusId => throw _privateConstructorUsedError;
-  String get observations => throw _privateConstructorUsedError;
-  bool get vegetable => throw _privateConstructorUsedError;
+  String? get observations => throw _privateConstructorUsedError;
+  bool? get vegetable => throw _privateConstructorUsedError;
   @JsonKey(name: 'main_species')
   PlantDetailMainSpecies get mainSpecies => throw _privateConstructorUsedError;
 
@@ -66,8 +66,8 @@ abstract class $PlantDetailCopyWith<$Res> {
       String author,
       @JsonKey(name: 'family_common_name') String? familyCommonName,
       @JsonKey(name: 'genus_id') int genusId,
-      String observations,
-      bool vegetable,
+      String? observations,
+      bool? vegetable,
       @JsonKey(name: 'main_species') PlantDetailMainSpecies mainSpecies});
 
   $PlantDetailMainSpeciesCopyWith<$Res> get mainSpecies;
@@ -97,8 +97,8 @@ class _$PlantDetailCopyWithImpl<$Res, $Val extends PlantDetail>
     Object? author = null,
     Object? familyCommonName = freezed,
     Object? genusId = null,
-    Object? observations = null,
-    Object? vegetable = null,
+    Object? observations = freezed,
+    Object? vegetable = freezed,
     Object? mainSpecies = null,
   }) {
     return _then(_value.copyWith(
@@ -146,14 +146,14 @@ class _$PlantDetailCopyWithImpl<$Res, $Val extends PlantDetail>
           ? _value.genusId
           : genusId // ignore: cast_nullable_to_non_nullable
               as int,
-      observations: null == observations
+      observations: freezed == observations
           ? _value.observations
           : observations // ignore: cast_nullable_to_non_nullable
-              as String,
-      vegetable: null == vegetable
+              as String?,
+      vegetable: freezed == vegetable
           ? _value.vegetable
           : vegetable // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as bool?,
       mainSpecies: null == mainSpecies
           ? _value.mainSpecies
           : mainSpecies // ignore: cast_nullable_to_non_nullable
@@ -190,8 +190,8 @@ abstract class _$$PlantDetailImplCopyWith<$Res>
       String author,
       @JsonKey(name: 'family_common_name') String? familyCommonName,
       @JsonKey(name: 'genus_id') int genusId,
-      String observations,
-      bool vegetable,
+      String? observations,
+      bool? vegetable,
       @JsonKey(name: 'main_species') PlantDetailMainSpecies mainSpecies});
 
   @override
@@ -220,8 +220,8 @@ class __$$PlantDetailImplCopyWithImpl<$Res>
     Object? author = null,
     Object? familyCommonName = freezed,
     Object? genusId = null,
-    Object? observations = null,
-    Object? vegetable = null,
+    Object? observations = freezed,
+    Object? vegetable = freezed,
     Object? mainSpecies = null,
   }) {
     return _then(_$PlantDetailImpl(
@@ -269,14 +269,14 @@ class __$$PlantDetailImplCopyWithImpl<$Res>
           ? _value.genusId
           : genusId // ignore: cast_nullable_to_non_nullable
               as int,
-      observations: null == observations
+      observations: freezed == observations
           ? _value.observations
           : observations // ignore: cast_nullable_to_non_nullable
-              as String,
-      vegetable: null == vegetable
+              as String?,
+      vegetable: freezed == vegetable
           ? _value.vegetable
           : vegetable // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as bool?,
       mainSpecies: null == mainSpecies
           ? _value.mainSpecies
           : mainSpecies // ignore: cast_nullable_to_non_nullable
@@ -300,8 +300,8 @@ class _$PlantDetailImpl implements _PlantDetail {
       required this.author,
       @JsonKey(name: 'family_common_name') this.familyCommonName,
       @JsonKey(name: 'genus_id') required this.genusId,
-      required this.observations,
-      required this.vegetable,
+      this.observations,
+      this.vegetable,
       @JsonKey(name: 'main_species') required this.mainSpecies});
 
   factory _$PlantDetailImpl.fromJson(Map<String, dynamic> json) =>
@@ -336,9 +336,9 @@ class _$PlantDetailImpl implements _PlantDetail {
   @JsonKey(name: 'genus_id')
   final int genusId;
   @override
-  final String observations;
+  final String? observations;
   @override
-  final bool vegetable;
+  final bool? vegetable;
   @override
   @JsonKey(name: 'main_species')
   final PlantDetailMainSpecies mainSpecies;
@@ -423,8 +423,8 @@ abstract class _PlantDetail implements PlantDetail {
       required final String author,
       @JsonKey(name: 'family_common_name') final String? familyCommonName,
       @JsonKey(name: 'genus_id') required final int genusId,
-      required final String observations,
-      required final bool vegetable,
+      final String? observations,
+      final bool? vegetable,
       @JsonKey(name: 'main_species')
       required final PlantDetailMainSpecies mainSpecies}) = _$PlantDetailImpl;
 
@@ -460,9 +460,9 @@ abstract class _PlantDetail implements PlantDetail {
   @JsonKey(name: 'genus_id')
   int get genusId;
   @override
-  String get observations;
+  String? get observations;
   @override
-  bool get vegetable;
+  bool? get vegetable;
   @override
   @JsonKey(name: 'main_species')
   PlantDetailMainSpecies get mainSpecies;
@@ -494,7 +494,7 @@ mixin _$PlantDetailMainSpecies {
   String? get familyCommonName => throw _privateConstructorUsedError;
   @JsonKey(name: 'genus_id')
   int get genusId => throw _privateConstructorUsedError;
-  String get observations => throw _privateConstructorUsedError;
+  String? get observations => throw _privateConstructorUsedError;
   bool get vegetable => throw _privateConstructorUsedError;
   @JsonKey(name: 'image_url')
   dynamic get imageUrl => throw _privateConstructorUsedError;
@@ -529,7 +529,7 @@ abstract class $PlantDetailMainSpeciesCopyWith<$Res> {
       String rank,
       @JsonKey(name: 'family_common_name') String? familyCommonName,
       @JsonKey(name: 'genus_id') int genusId,
-      String observations,
+      String? observations,
       bool vegetable,
       @JsonKey(name: 'image_url') dynamic imageUrl,
       String genus,
@@ -564,7 +564,7 @@ class _$PlantDetailMainSpeciesCopyWithImpl<$Res,
     Object? rank = null,
     Object? familyCommonName = freezed,
     Object? genusId = null,
-    Object? observations = null,
+    Object? observations = freezed,
     Object? vegetable = null,
     Object? imageUrl = freezed,
     Object? genus = null,
@@ -618,10 +618,10 @@ class _$PlantDetailMainSpeciesCopyWithImpl<$Res,
           ? _value.genusId
           : genusId // ignore: cast_nullable_to_non_nullable
               as int,
-      observations: null == observations
+      observations: freezed == observations
           ? _value.observations
           : observations // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       vegetable: null == vegetable
           ? _value.vegetable
           : vegetable // ignore: cast_nullable_to_non_nullable
@@ -675,7 +675,7 @@ abstract class _$$PlantDetailMainSpeciesImplCopyWith<$Res>
       String rank,
       @JsonKey(name: 'family_common_name') String? familyCommonName,
       @JsonKey(name: 'genus_id') int genusId,
-      String observations,
+      String? observations,
       bool vegetable,
       @JsonKey(name: 'image_url') dynamic imageUrl,
       String genus,
@@ -709,7 +709,7 @@ class __$$PlantDetailMainSpeciesImplCopyWithImpl<$Res>
     Object? rank = null,
     Object? familyCommonName = freezed,
     Object? genusId = null,
-    Object? observations = null,
+    Object? observations = freezed,
     Object? vegetable = null,
     Object? imageUrl = freezed,
     Object? genus = null,
@@ -763,10 +763,10 @@ class __$$PlantDetailMainSpeciesImplCopyWithImpl<$Res>
           ? _value.genusId
           : genusId // ignore: cast_nullable_to_non_nullable
               as int,
-      observations: null == observations
+      observations: freezed == observations
           ? _value.observations
           : observations // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       vegetable: null == vegetable
           ? _value.vegetable
           : vegetable // ignore: cast_nullable_to_non_nullable
@@ -814,7 +814,7 @@ class _$PlantDetailMainSpeciesImpl implements _PlantDetailMainSpecies {
       required this.rank,
       @JsonKey(name: 'family_common_name') this.familyCommonName,
       @JsonKey(name: 'genus_id') required this.genusId,
-      required this.observations,
+      this.observations,
       required this.vegetable,
       @JsonKey(name: 'image_url') required this.imageUrl,
       required this.genus,
@@ -853,7 +853,7 @@ class _$PlantDetailMainSpeciesImpl implements _PlantDetailMainSpecies {
   @JsonKey(name: 'genus_id')
   final int genusId;
   @override
-  final String observations;
+  final String? observations;
   @override
   final bool vegetable;
   @override
@@ -962,7 +962,7 @@ abstract class _PlantDetailMainSpecies implements PlantDetailMainSpecies {
       required final String rank,
       @JsonKey(name: 'family_common_name') final String? familyCommonName,
       @JsonKey(name: 'genus_id') required final int genusId,
-      required final String observations,
+      final String? observations,
       required final bool vegetable,
       @JsonKey(name: 'image_url') required final dynamic imageUrl,
       required final String genus,
@@ -1001,7 +1001,7 @@ abstract class _PlantDetailMainSpecies implements PlantDetailMainSpecies {
   @JsonKey(name: 'genus_id')
   int get genusId;
   @override
-  String get observations;
+  String? get observations;
   @override
   bool get vegetable;
   @override

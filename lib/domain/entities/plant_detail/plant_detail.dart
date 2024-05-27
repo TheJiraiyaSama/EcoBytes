@@ -18,8 +18,8 @@ class PlantDetail with _$PlantDetail {
     required String author,
     @JsonKey(name: 'family_common_name') String? familyCommonName,
     @JsonKey(name: 'genus_id') required int genusId,
-    required String observations,
-    required bool vegetable,
+    String? observations,
+    bool? vegetable,
     @JsonKey(name: 'main_species') required PlantDetailMainSpecies mainSpecies,
   }) = _PlantDetail;
 
@@ -41,7 +41,7 @@ class PlantDetailMainSpecies with _$PlantDetailMainSpecies {
     required String rank,
     @JsonKey(name: 'family_common_name') String? familyCommonName,
     @JsonKey(name: 'genus_id') required int genusId,
-    required String observations,
+    String? observations,
     required bool vegetable,
     @JsonKey(name: 'image_url') required dynamic imageUrl,
     required String genus,

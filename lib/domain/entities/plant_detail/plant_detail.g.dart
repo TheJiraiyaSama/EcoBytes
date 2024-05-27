@@ -28,8 +28,8 @@ _$PlantDetailImpl _$$PlantDetailImplFromJson(Map<String, dynamic> json) =>
           familyCommonName:
               $checkedConvert('family_common_name', (v) => v as String?),
           genusId: $checkedConvert('genus_id', (v) => (v as num).toInt()),
-          observations: $checkedConvert('observations', (v) => v as String),
-          vegetable: $checkedConvert('vegetable', (v) => v as bool),
+          observations: $checkedConvert('observations', (v) => v as String?),
+          vegetable: $checkedConvert('vegetable', (v) => v as bool?),
           mainSpecies: $checkedConvert(
               'main_species',
               (v) =>
@@ -86,7 +86,7 @@ _$PlantDetailMainSpeciesImpl _$$PlantDetailMainSpeciesImplFromJson(
           familyCommonName:
               $checkedConvert('family_common_name', (v) => v as String?),
           genusId: $checkedConvert('genus_id', (v) => (v as num).toInt()),
-          observations: $checkedConvert('observations', (v) => v as String),
+          observations: $checkedConvert('observations', (v) => v as String?),
           vegetable: $checkedConvert('vegetable', (v) => v as bool),
           imageUrl: $checkedConvert('image_url', (v) => v),
           genus: $checkedConvert('genus', (v) => v as String),
