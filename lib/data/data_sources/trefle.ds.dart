@@ -52,9 +52,16 @@ class TrefleAPIDS {
         },
       );
 
-      final plantList = (response.data["data"] as List<dynamic>).first["id"];
+      final plantList = ((response.data["data"] as List<dynamic>) ?? []);
 
-      return plantList;
+      if (plantList.isEmpty) {
+        throw AppException(
+          message: "No plant found with the name $scientificName",
+          stackTrace: StackTrace.current,
+        );
+      }
+
+      return plantList.first["id"];
     }, (e, sT) {
       if (e is DioException) {
         return AppException(

@@ -30,7 +30,7 @@ mixin _$PlantDetail {
   int get mainSpeciesId => throw _privateConstructorUsedError;
   @JsonKey(name: 'image_url')
   dynamic get imageUrl => throw _privateConstructorUsedError;
-  int get year => throw _privateConstructorUsedError;
+  int? get year => throw _privateConstructorUsedError;
   String get bibliography => throw _privateConstructorUsedError;
   String get author => throw _privateConstructorUsedError;
   @JsonKey(name: 'family_common_name')
@@ -61,7 +61,7 @@ abstract class $PlantDetailCopyWith<$Res> {
       @JsonKey(name: 'scientific_name') String scientificName,
       @JsonKey(name: 'main_species_id') int mainSpeciesId,
       @JsonKey(name: 'image_url') dynamic imageUrl,
-      int year,
+      int? year,
       String bibliography,
       String author,
       @JsonKey(name: 'family_common_name') String? familyCommonName,
@@ -92,7 +92,7 @@ class _$PlantDetailCopyWithImpl<$Res, $Val extends PlantDetail>
     Object? scientificName = null,
     Object? mainSpeciesId = null,
     Object? imageUrl = freezed,
-    Object? year = null,
+    Object? year = freezed,
     Object? bibliography = null,
     Object? author = null,
     Object? familyCommonName = freezed,
@@ -126,10 +126,10 @@ class _$PlantDetailCopyWithImpl<$Res, $Val extends PlantDetail>
           ? _value.imageUrl
           : imageUrl // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      year: null == year
+      year: freezed == year
           ? _value.year
           : year // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       bibliography: null == bibliography
           ? _value.bibliography
           : bibliography // ignore: cast_nullable_to_non_nullable
@@ -185,7 +185,7 @@ abstract class _$$PlantDetailImplCopyWith<$Res>
       @JsonKey(name: 'scientific_name') String scientificName,
       @JsonKey(name: 'main_species_id') int mainSpeciesId,
       @JsonKey(name: 'image_url') dynamic imageUrl,
-      int year,
+      int? year,
       String bibliography,
       String author,
       @JsonKey(name: 'family_common_name') String? familyCommonName,
@@ -215,7 +215,7 @@ class __$$PlantDetailImplCopyWithImpl<$Res>
     Object? scientificName = null,
     Object? mainSpeciesId = null,
     Object? imageUrl = freezed,
-    Object? year = null,
+    Object? year = freezed,
     Object? bibliography = null,
     Object? author = null,
     Object? familyCommonName = freezed,
@@ -249,10 +249,10 @@ class __$$PlantDetailImplCopyWithImpl<$Res>
           ? _value.imageUrl
           : imageUrl // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      year: null == year
+      year: freezed == year
           ? _value.year
           : year // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       bibliography: null == bibliography
           ? _value.bibliography
           : bibliography // ignore: cast_nullable_to_non_nullable
@@ -295,7 +295,7 @@ class _$PlantDetailImpl implements _PlantDetail {
       @JsonKey(name: 'scientific_name') required this.scientificName,
       @JsonKey(name: 'main_species_id') required this.mainSpeciesId,
       @JsonKey(name: 'image_url') required this.imageUrl,
-      required this.year,
+      this.year,
       required this.bibliography,
       required this.author,
       @JsonKey(name: 'family_common_name') this.familyCommonName,
@@ -324,7 +324,7 @@ class _$PlantDetailImpl implements _PlantDetail {
   @JsonKey(name: 'image_url')
   final dynamic imageUrl;
   @override
-  final int year;
+  final int? year;
   @override
   final String bibliography;
   @override
@@ -418,7 +418,7 @@ abstract class _PlantDetail implements PlantDetail {
       @JsonKey(name: 'scientific_name') required final String scientificName,
       @JsonKey(name: 'main_species_id') required final int mainSpeciesId,
       @JsonKey(name: 'image_url') required final dynamic imageUrl,
-      required final int year,
+      final int? year,
       required final String bibliography,
       required final String author,
       @JsonKey(name: 'family_common_name') final String? familyCommonName,
@@ -448,7 +448,7 @@ abstract class _PlantDetail implements PlantDetail {
   @JsonKey(name: 'image_url')
   dynamic get imageUrl;
   @override
-  int get year;
+  int? get year;
   @override
   String get bibliography;
   @override

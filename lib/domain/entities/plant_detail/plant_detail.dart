@@ -13,7 +13,7 @@ class PlantDetail with _$PlantDetail {
     @JsonKey(name: 'scientific_name') required String scientificName,
     @JsonKey(name: 'main_species_id') required int mainSpeciesId,
     @JsonKey(name: 'image_url') required dynamic imageUrl,
-    required int year,
+    int? year,
     required String bibliography,
     required String author,
     @JsonKey(name: 'family_common_name') String? familyCommonName,

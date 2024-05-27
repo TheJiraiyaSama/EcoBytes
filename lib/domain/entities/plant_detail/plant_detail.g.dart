@@ -22,7 +22,7 @@ _$PlantDetailImpl _$$PlantDetailImplFromJson(Map<String, dynamic> json) =>
           mainSpeciesId:
               $checkedConvert('main_species_id', (v) => (v as num).toInt()),
           imageUrl: $checkedConvert('image_url', (v) => v),
-          year: $checkedConvert('year', (v) => (v as num).toInt()),
+          year: $checkedConvert('year', (v) => (v as num?)?.toInt()),
           bibliography: $checkedConvert('bibliography', (v) => v as String),
           author: $checkedConvert('author', (v) => v as String),
           familyCommonName:

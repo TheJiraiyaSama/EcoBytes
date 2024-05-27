@@ -52,7 +52,7 @@ class SearchResultsScreen extends ConsumerWidget {
                     ref.read(appRouterProvider).push(
                           PlantDetailRoute(
                             scientificName:
-                                currentResult.species.scientificName,
+                                currentResult.species.commonNames.first,
                           ),
                         );
                   },
