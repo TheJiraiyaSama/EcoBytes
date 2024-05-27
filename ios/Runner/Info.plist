@@ -53,5 +53,9 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This app will manage the leaf data that is required for searching.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>This app will manage the leaf data that is required for searching.</string>
 </dict>
 </plist>
