@@ -43,7 +43,6 @@ dependencies:
   camera: ^0.11.0
   dio: ^5.4.3+1
   image_picker: ^1.1.1
-  dotenv: ^4.2.0
   freezed_annotation: ^2.4.1
   json_annotation: ^4.9.0
   hooks_riverpod: ^2.5.1
@@ -57,6 +56,8 @@ dependencies:
   flutter_keyboard_visibility: ^6.0.0
   google_nav_bar: ^5.0.6
   gap: ^3.0.1
+  flutter_dotenv: ^5.1.0
+  flash: ^3.1.0
 
 dev_dependencies:
   flutter_test:
