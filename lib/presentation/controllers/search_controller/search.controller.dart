@@ -1,7 +1,7 @@
 import 'package:camera/camera.dart';
 import 'package:ecobytes/core/logger/talker.dart';
 import 'package:ecobytes/domain/providers/use_case_providers/use_case.providers.dart';
-import 'package:ecobytes/presentation/search_controller/state/search.state.dart';
+import 'package:ecobytes/presentation/controllers/search_controller/state/search.state.dart';
 import 'package:ecobytes/utils/exceptions/app_exception.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 

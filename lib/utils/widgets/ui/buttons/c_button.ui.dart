@@ -28,8 +28,8 @@ class CButton extends StatelessWidget {
         ),
         disabledBackgroundColor: palette?.secondary,
         disabledForegroundColor: palette?.primary,
-        foregroundColor: palette?.accent,
-        backgroundColor: palette?.secondary,
+        foregroundColor: palette?.secondary,
+        backgroundColor: palette?.accent,
       ),
       onPressed: onPressed,
       child: Text(

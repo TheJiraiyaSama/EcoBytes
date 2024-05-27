@@ -53,14 +53,14 @@ class CScaffold extends StatelessWidget {
               margin: EdgeInsets.only(left: 14.w, right: 14.w, bottom: 18.h),
               padding: EdgeInsets.symmetric(horizontal: 18.w, vertical: 18.h),
               decoration: BoxDecoration(
-                color: palette?.accent ?? Colors.white,
+                color: palette?.secondary ?? Colors.white,
                 borderRadius: BorderRadius.circular(100.r),
               ),
               child: GNav(
                   selectedIndex: tabsRouter!.activeIndex,
                   onTabChange: tabsRouter!.setActiveIndex,
                   // haptic feedback
-                  backgroundColor: palette?.accent ?? Colors.white,
+                  backgroundColor: palette?.secondary ?? Colors.white,
                   color: palette?.primary,
 
                   // elevation: 0,
@@ -70,10 +70,10 @@ class CScaffold extends StatelessWidget {
                   padding:
                       EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
                   gap: 8.w,
-                  activeColor: palette?.accent,
+                  activeColor: palette?.secondary,
                   tabBorderRadius: 24.r,
                   textStyle: typography?.body2Bold?.copyWith(
-                    color: palette?.accent,
+                    color: palette?.secondary,
                   ),
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   // navigation bar padding

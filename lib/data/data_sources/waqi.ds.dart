@@ -1,27 +1,26 @@
 import 'package:dio/dio.dart';
-import 'package:ecobytes/domain/entities/openweather_info/open_weather_info.dart';
 import 'package:ecobytes/utils/exceptions/app_exception.dart';
 import 'package:fpdart/fpdart.dart';
 
-class OpenWeatherDS {
+class WaqiDS {
   final Dio _dio;
 
-  OpenWeatherDS(this._dio);
+  WaqiDS(this._dio);
 
-  TaskEither<AppException, OpenWeatherInfo> getWeatherInfo(String city) {
+  TaskEither<AppException, int> getAirQualityIndex(String city) {
     return TaskEither.tryCatch(() async {
-      final response = await _dio.get("", queryParameters: {
-        "q": city,
+      final response = await _dio.get("/$city", queryParameters: {
+        "city": city,
       });
 
-      final info = OpenWeatherInfo.fromJson(response.data);
+      final index = response.data["data"]["aqi"];
 
-      return info;
+      return index;
     }, (error, stackTrace) {
       if (error is DioException) {
         return AppException(
           message: error.message ??
-              "Something went wrong when fetching weather data",
+              "Something went wrong when fetching air quality data",
           stackTrace: error.stackTrace,
         );
       }

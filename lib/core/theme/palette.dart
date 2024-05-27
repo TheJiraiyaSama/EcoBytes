@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 @immutable
 class Palette extends ThemeExtension<Palette> {
-
   final MaterialColor? primary;
   final MaterialColor? secondary;
   final MaterialColor? accent;
@@ -51,11 +50,7 @@ class Palette extends ThemeExtension<Palette> {
 
   static Palette lightTheme = Palette(
     primary: MaterialColor(const Color(0xff99A78E).value, {}),
-    secondary: MaterialColor(const Color(0xffC0BFB4).value, const {
-
-    }),
-    accent: MaterialColor(const Color(0xff50683D).value, const {
-
-    }),
+    secondary: MaterialColor(const Color(0xff5D6D5B).value, const {}),
+    accent: MaterialColor(const Color(0xffFFB300).value, const {}),
   );
 }

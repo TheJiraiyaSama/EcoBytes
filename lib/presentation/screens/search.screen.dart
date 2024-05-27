@@ -5,7 +5,7 @@ import 'package:camera/camera.dart';
 import 'package:ecobytes/core/constants/enums.dart';
 import 'package:ecobytes/core/router/app_router.dart';
 import 'package:ecobytes/core/router/app_router.gr.dart';
-import 'package:ecobytes/presentation/search_controller/search.controller.dart';
+import 'package:ecobytes/presentation/controllers/search_controller/search.controller.dart';
 import 'package:ecobytes/presentation/shared/providers/snack_bar_messenger_provider/snack_bar_messenger_provider.dart';
 import 'package:ecobytes/utils/hooks/use_camera_controller.hook.dart';
 import 'package:ecobytes/utils/show_snack_bar_on_error.ext.dart';
@@ -51,7 +51,7 @@ class SearchScreen extends HookConsumerWidget {
         }
         if (isResults &&
             next.value?.capturedImage != null &&
-            next.value?.type == null) {
+            next.value?.type != null) {
           ref.read(appRouterProvider).push(
                 SearchResultsRoute(
                   scannedResults: next.value!.results,

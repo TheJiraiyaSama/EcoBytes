@@ -26,5 +26,37 @@ final getPlantClassificationUCProvider =
 
 typedef GetPlantClassificationUCRef
     = AutoDisposeProviderRef<GetPlantClassificationUC>;
+String _$getPlantListUCHash() => r'f13c5e2d9d15f19a49ce865ed786b111dc216741';
+
+/// See also [getPlantListUC].
+@ProviderFor(getPlantListUC)
+final getPlantListUCProvider = AutoDisposeProvider<GetPlantListUC>.internal(
+  getPlantListUC,
+  name: r'getPlantListUCProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$getPlantListUCHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef GetPlantListUCRef = AutoDisposeProviderRef<GetPlantListUC>;
+String _$getWeatherCardInfoUCHash() =>
+    r'3dfd56b6452477271132a5af30212bcb065d2385';
+
+/// See also [getWeatherCardInfoUC].
+@ProviderFor(getWeatherCardInfoUC)
+final getWeatherCardInfoUCProvider =
+    AutoDisposeProvider<GetWeatherCardInfoUC>.internal(
+  getWeatherCardInfoUC,
+  name: r'getWeatherCardInfoUCProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$getWeatherCardInfoUCHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef GetWeatherCardInfoUCRef = AutoDisposeProviderRef<GetWeatherCardInfoUC>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
