@@ -11,7 +11,7 @@ class ScanResultEntity with _$ScanResultEntity {
     required ScanResultSpeciesEntity species,
     @Default([]) List<ScanResultImagesEntity> images,
     required ScanResultGbifEntity gbif,
-    required ScanResultPowoEntity powo,
+    ScanResultPowoEntity? powo,
     ScanResultIucnEntity? iucn,
   }) = _ScanResultEntity;
 

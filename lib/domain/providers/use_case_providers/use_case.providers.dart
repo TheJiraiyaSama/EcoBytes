@@ -1,5 +1,6 @@
 import 'package:ecobytes/data/providers/repo_providers/repo.providers.dart';
 import 'package:ecobytes/domain/use_cases/get_classification_result.uc.dart';
+import 'package:ecobytes/domain/use_cases/get_plant_details_with_scientific_name.uc.dart';
 import 'package:ecobytes/domain/use_cases/get_plant_list.uc.dart';
 import 'package:ecobytes/domain/use_cases/get_weather_card_info.uc.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -23,4 +24,10 @@ GetWeatherCardInfoUC getWeatherCardInfoUC(GetWeatherCardInfoUCRef ref) {
     ref.read(openWeatherRepoProvider),
     ref.read(waqiRepoProvider),
   );
+}
+
+@riverpod
+GetPlantDetailsWithScientificName getPlantDetailsWithScientificName(
+    GetPlantDetailsWithScientificNameRef ref) {
+  return GetPlantDetailsWithScientificName(ref.read(plantInfoRepoProvider));
 }

@@ -24,7 +24,7 @@ mixin _$ScanResultEntity {
   ScanResultSpeciesEntity get species => throw _privateConstructorUsedError;
   List<ScanResultImagesEntity> get images => throw _privateConstructorUsedError;
   ScanResultGbifEntity get gbif => throw _privateConstructorUsedError;
-  ScanResultPowoEntity get powo => throw _privateConstructorUsedError;
+  ScanResultPowoEntity? get powo => throw _privateConstructorUsedError;
   ScanResultIucnEntity? get iucn => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -44,12 +44,12 @@ abstract class $ScanResultEntityCopyWith<$Res> {
       ScanResultSpeciesEntity species,
       List<ScanResultImagesEntity> images,
       ScanResultGbifEntity gbif,
-      ScanResultPowoEntity powo,
+      ScanResultPowoEntity? powo,
       ScanResultIucnEntity? iucn});
 
   $ScanResultSpeciesEntityCopyWith<$Res> get species;
   $ScanResultGbifEntityCopyWith<$Res> get gbif;
-  $ScanResultPowoEntityCopyWith<$Res> get powo;
+  $ScanResultPowoEntityCopyWith<$Res>? get powo;
   $ScanResultIucnEntityCopyWith<$Res>? get iucn;
 }
 
@@ -70,7 +70,7 @@ class _$ScanResultEntityCopyWithImpl<$Res, $Val extends ScanResultEntity>
     Object? species = null,
     Object? images = null,
     Object? gbif = null,
-    Object? powo = null,
+    Object? powo = freezed,
     Object? iucn = freezed,
   }) {
     return _then(_value.copyWith(
@@ -90,10 +90,10 @@ class _$ScanResultEntityCopyWithImpl<$Res, $Val extends ScanResultEntity>
           ? _value.gbif
           : gbif // ignore: cast_nullable_to_non_nullable
               as ScanResultGbifEntity,
-      powo: null == powo
+      powo: freezed == powo
           ? _value.powo
           : powo // ignore: cast_nullable_to_non_nullable
-              as ScanResultPowoEntity,
+              as ScanResultPowoEntity?,
       iucn: freezed == iucn
           ? _value.iucn
           : iucn // ignore: cast_nullable_to_non_nullable
@@ -119,8 +119,12 @@ class _$ScanResultEntityCopyWithImpl<$Res, $Val extends ScanResultEntity>
 
   @override
   @pragma('vm:prefer-inline')
-  $ScanResultPowoEntityCopyWith<$Res> get powo {
-    return $ScanResultPowoEntityCopyWith<$Res>(_value.powo, (value) {
+  $ScanResultPowoEntityCopyWith<$Res>? get powo {
+    if (_value.powo == null) {
+      return null;
+    }
+
+    return $ScanResultPowoEntityCopyWith<$Res>(_value.powo!, (value) {
       return _then(_value.copyWith(powo: value) as $Val);
     });
   }
@@ -151,7 +155,7 @@ abstract class _$$ScanResultEntityImplCopyWith<$Res>
       ScanResultSpeciesEntity species,
       List<ScanResultImagesEntity> images,
       ScanResultGbifEntity gbif,
-      ScanResultPowoEntity powo,
+      ScanResultPowoEntity? powo,
       ScanResultIucnEntity? iucn});
 
   @override
@@ -159,7 +163,7 @@ abstract class _$$ScanResultEntityImplCopyWith<$Res>
   @override
   $ScanResultGbifEntityCopyWith<$Res> get gbif;
   @override
-  $ScanResultPowoEntityCopyWith<$Res> get powo;
+  $ScanResultPowoEntityCopyWith<$Res>? get powo;
   @override
   $ScanResultIucnEntityCopyWith<$Res>? get iucn;
 }
@@ -179,7 +183,7 @@ class __$$ScanResultEntityImplCopyWithImpl<$Res>
     Object? species = null,
     Object? images = null,
     Object? gbif = null,
-    Object? powo = null,
+    Object? powo = freezed,
     Object? iucn = freezed,
   }) {
     return _then(_$ScanResultEntityImpl(
@@ -199,10 +203,10 @@ class __$$ScanResultEntityImplCopyWithImpl<$Res>
           ? _value.gbif
           : gbif // ignore: cast_nullable_to_non_nullable
               as ScanResultGbifEntity,
-      powo: null == powo
+      powo: freezed == powo
           ? _value.powo
           : powo // ignore: cast_nullable_to_non_nullable
-              as ScanResultPowoEntity,
+              as ScanResultPowoEntity?,
       iucn: freezed == iucn
           ? _value.iucn
           : iucn // ignore: cast_nullable_to_non_nullable
@@ -219,7 +223,7 @@ class _$ScanResultEntityImpl implements _ScanResultEntity {
       required this.species,
       final List<ScanResultImagesEntity> images = const [],
       required this.gbif,
-      required this.powo,
+      this.powo,
       this.iucn})
       : _images = images;
 
@@ -242,7 +246,7 @@ class _$ScanResultEntityImpl implements _ScanResultEntity {
   @override
   final ScanResultGbifEntity gbif;
   @override
-  final ScanResultPowoEntity powo;
+  final ScanResultPowoEntity? powo;
   @override
   final ScanResultIucnEntity? iucn;
 
@@ -290,7 +294,7 @@ abstract class _ScanResultEntity implements ScanResultEntity {
       required final ScanResultSpeciesEntity species,
       final List<ScanResultImagesEntity> images,
       required final ScanResultGbifEntity gbif,
-      required final ScanResultPowoEntity powo,
+      final ScanResultPowoEntity? powo,
       final ScanResultIucnEntity? iucn}) = _$ScanResultEntityImpl;
 
   factory _ScanResultEntity.fromJson(Map<String, dynamic> json) =
@@ -305,7 +309,7 @@ abstract class _ScanResultEntity implements ScanResultEntity {
   @override
   ScanResultGbifEntity get gbif;
   @override
-  ScanResultPowoEntity get powo;
+  ScanResultPowoEntity? get powo;
   @override
   ScanResultIucnEntity? get iucn;
   @override

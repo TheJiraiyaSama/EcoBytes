@@ -58,5 +58,23 @@ final getWeatherCardInfoUCProvider =
 );
 
 typedef GetWeatherCardInfoUCRef = AutoDisposeProviderRef<GetWeatherCardInfoUC>;
+String _$getPlantDetailsWithScientificNameHash() =>
+    r'72046421a8a854711dfef0c8050dc55f88020951';
+
+/// See also [getPlantDetailsWithScientificName].
+@ProviderFor(getPlantDetailsWithScientificName)
+final getPlantDetailsWithScientificNameProvider =
+    AutoDisposeProvider<GetPlantDetailsWithScientificName>.internal(
+  getPlantDetailsWithScientificName,
+  name: r'getPlantDetailsWithScientificNameProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$getPlantDetailsWithScientificNameHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef GetPlantDetailsWithScientificNameRef
+    = AutoDisposeProviderRef<GetPlantDetailsWithScientificName>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

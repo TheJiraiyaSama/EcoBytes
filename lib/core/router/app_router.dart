@@ -41,5 +41,8 @@ class AppRouter extends $AppRouter {
         AutoRoute(
           page: SearchResultsRoute.page,
         ),
+        AutoRoute(
+          page: PlantDetailRoute.page,
+        ),
       ];
 }

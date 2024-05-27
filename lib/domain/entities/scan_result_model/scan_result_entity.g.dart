@@ -30,8 +30,11 @@ _$ScanResultEntityImpl _$$ScanResultEntityImplFromJson(
                   const []),
           gbif: $checkedConvert('gbif',
               (v) => ScanResultGbifEntity.fromJson(v as Map<String, dynamic>)),
-          powo: $checkedConvert('powo',
-              (v) => ScanResultPowoEntity.fromJson(v as Map<String, dynamic>)),
+          powo: $checkedConvert(
+              'powo',
+              (v) => v == null
+                  ? null
+                  : ScanResultPowoEntity.fromJson(v as Map<String, dynamic>)),
           iucn: $checkedConvert(
               'iucn',
               (v) => v == null
@@ -49,7 +52,7 @@ Map<String, dynamic> _$$ScanResultEntityImplToJson(
       'species': instance.species.toJson(),
       'images': instance.images.map((e) => e.toJson()).toList(),
       'gbif': instance.gbif.toJson(),
-      'powo': instance.powo.toJson(),
+      'powo': instance.powo?.toJson(),
       'iucn': instance.iucn?.toJson(),
     };
 

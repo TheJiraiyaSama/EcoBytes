@@ -1,6 +1,8 @@
 import 'dart:io';
 
 import 'package:auto_route/annotations.dart';
+import 'package:ecobytes/core/router/app_router.dart';
+import 'package:ecobytes/core/router/app_router.gr.dart';
 import 'package:ecobytes/core/theme/palette.dart';
 import 'package:ecobytes/domain/entities/scan_result_model/scan_result_entity.dart';
 import 'package:ecobytes/utils/widgets/ui/layout/c_scaffold.layout.dart';
@@ -45,33 +47,43 @@ class SearchResultsScreen extends ConsumerWidget {
               itemBuilder: (context, i) {
                 final currentResult = scannedResults[i];
 
-                return Card(
-                  elevation: 2,
-                  color: palette?.secondary,
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(
-                      vertical: 8.h,
-                      horizontal: 16.w,
-                    ),
-                    child: Column(
-                      children: [
-                        Text(
-                          currentResult.species.scientificName,
-                        ).title2(),
-                        Gap(16.h),
-                        Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Common Names: ${currentResult.species.commonNames.join(", ")}",
-                                softWrap: true,
-                              ).body1(),
-                              Gap(8.h),
-                              Text(
-                                "Family: ${currentResult.species.family.scientificName}",
-                              ).body2(),
-                            ])
-                      ],
+                return GestureDetector(
+                  onTap: () {
+                    ref.read(appRouterProvider).push(
+                          PlantDetailRoute(
+                            scientificName:
+                                currentResult.species.scientificName,
+                          ),
+                        );
+                  },
+                  child: Card(
+                    elevation: 2,
+                    color: palette?.secondary,
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                        vertical: 8.h,
+                        horizontal: 16.w,
+                      ),
+                      child: Column(
+                        children: [
+                          Text(
+                            currentResult.species.scientificName,
+                          ).title2(),
+                          Gap(16.h),
+                          Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Common Names: ${currentResult.species.commonNames.join(", ")}",
+                                  softWrap: true,
+                                ).body1(),
+                                Gap(8.h),
+                                Text(
+                                  "Family: ${currentResult.species.family.scientificName}",
+                                ).body2(),
+                              ])
+                        ],
+                      ),
                     ),
                   ),
                 );
