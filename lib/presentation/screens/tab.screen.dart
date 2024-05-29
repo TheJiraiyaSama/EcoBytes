@@ -15,6 +15,7 @@ class MainTabBarScreen extends HookConsumerWidget {
       routes: const [
         HomeRoute(),
         SearchRoute(),
+        PlantHistoryRoute(),
         CategoriesRoute(),
         ProfileRoute(),
       ],

@@ -1,3 +1,4 @@
+import 'package:ecobytes/core/config.dart';
 import 'package:ecobytes/core/logger/talker.dart';
 import 'package:ecobytes/core/router/app_router.dart';
 import 'package:ecobytes/core/theme/app_theme.dart';
@@ -8,11 +9,19 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 Future<void> main() async {
+  final config = AppConfig();
+
+  await config.configureHive();
+
+  GoogleFonts.config.allowRuntimeFetching = false;
+
   ProviderContainer container = ProviderContainer();
   final talker = container.read(talkerProvider);
   container.observers.add(talker.talkerRiverpodObserver);

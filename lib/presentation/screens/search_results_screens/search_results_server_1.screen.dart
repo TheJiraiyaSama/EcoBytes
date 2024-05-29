@@ -4,6 +4,7 @@ import 'package:auto_route/annotations.dart';
 import 'package:ecobytes/core/router/app_router.dart';
 import 'package:ecobytes/core/router/app_router.gr.dart';
 import 'package:ecobytes/core/theme/palette.dart';
+import 'package:ecobytes/domain/entities/plant_id_plant_suggestion/plant_id_plant_data.dart';
 import 'package:ecobytes/domain/entities/scan_result_model/scan_result_entity.dart';
 import 'package:ecobytes/utils/widgets/ui/layout/c_scaffold.layout.dart';
 import 'package:ecobytes/utils/widgets/ui/typography/body.typo.dart';
@@ -14,15 +15,13 @@ import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 @RoutePage()
-class SearchResultsScreen extends ConsumerWidget {
-  const SearchResultsScreen({
+class SearchResultsServer1Screen extends ConsumerWidget {
+  const SearchResultsServer1Screen({
     super.key,
-    required this.scannedResults,
-    required this.scannedImagePath,
+    required this.plantData,
   });
 
-  final List<ScanResultEntity> scannedResults;
-  final String scannedImagePath;
+  final PlantIdPlantData plantData;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -36,8 +35,8 @@ class SearchResultsScreen extends ConsumerWidget {
             ),
             height: 400.h,
             clipBehavior: Clip.hardEdge,
-            child: Image.file(
-              File(scannedImagePath),
+            child: Image.network(
+              plantData.input.images?.first ?? "",
               fit: BoxFit.fill,
             ),
           ),
@@ -45,15 +44,14 @@ class SearchResultsScreen extends ConsumerWidget {
           Expanded(
             child: ListView.separated(
               itemBuilder: (context, i) {
-                final currentResult = scannedResults[i];
+                final currentResult =
+                    (plantData.result.classification?.suggestions?[i]);
+                if (currentResult == null) return const SizedBox();
 
                 return GestureDetector(
                   onTap: () {
                     ref.read(appRouterProvider).push(
-                          PlantDetailRoute(
-                            scientificName:
-                                currentResult.species.commonNames.first,
-                          ),
+                          PlantDetailServer1Route(plantData: plantData),
                         );
                   },
                   child: Card(
@@ -67,19 +65,19 @@ class SearchResultsScreen extends ConsumerWidget {
                       child: Column(
                         children: [
                           Text(
-                            currentResult.species.scientificName,
+                            currentResult.name ?? "No Name",
                           ).title2(),
                           Gap(16.h),
                           Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "Common Names: ${currentResult.species.commonNames.join(", ")}",
+                                  "Common Names: ${currentResult.details?.commonNames?.join(", ")}",
                                   softWrap: true,
                                 ).body1(),
                                 Gap(8.h),
                                 Text(
-                                  "Family: ${currentResult.species.family.scientificName}",
+                                  "Family: ${currentResult.details?.taxonomy?.family}",
                                 ).body2(),
                               ])
                         ],
@@ -89,7 +87,8 @@ class SearchResultsScreen extends ConsumerWidget {
                 );
               },
               separatorBuilder: (_, __) => Gap(24.h),
-              itemCount: scannedResults.length,
+              itemCount:
+                  plantData.result.classification?.suggestions?.length ?? 0,
             ),
           ),
         ],

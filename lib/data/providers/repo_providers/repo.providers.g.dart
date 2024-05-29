@@ -52,5 +52,19 @@ final waqiRepoProvider = AutoDisposeProvider<WaqiRepo>.internal(
 );
 
 typedef WaqiRepoRef = AutoDisposeProviderRef<WaqiRepo>;
+String _$plantIdRepoHash() => r'4f75db8e1abf3bfbeb979c6f5068c235b338438e';
+
+/// See also [plantIdRepo].
+@ProviderFor(plantIdRepo)
+final plantIdRepoProvider = AutoDisposeProvider<PlantIdRepo>.internal(
+  plantIdRepo,
+  name: r'plantIdRepoProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$plantIdRepoHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef PlantIdRepoRef = AutoDisposeProviderRef<PlantIdRepo>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

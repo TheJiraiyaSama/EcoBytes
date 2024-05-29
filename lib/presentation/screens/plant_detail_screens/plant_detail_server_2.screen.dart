@@ -10,8 +10,8 @@ import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 @RoutePage()
-class PlantDetailScreen extends ConsumerWidget {
-  const PlantDetailScreen({
+class PlantDetailServer2Screen extends ConsumerWidget {
+  const PlantDetailServer2Screen({
     super.key,
     required this.scientificName,
   });

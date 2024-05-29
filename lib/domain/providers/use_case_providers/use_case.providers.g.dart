@@ -76,5 +76,56 @@ final getPlantDetailsWithScientificNameProvider =
 
 typedef GetPlantDetailsWithScientificNameRef
     = AutoDisposeProviderRef<GetPlantDetailsWithScientificName>;
+String _$createPlantIdClassificationUCHash() =>
+    r'68a63483cc0eafe8fe3bd65063d3398505dcf20b';
+
+/// See also [createPlantIdClassificationUC].
+@ProviderFor(createPlantIdClassificationUC)
+final createPlantIdClassificationUCProvider =
+    AutoDisposeProvider<CreatePlantIdClassificationUC>.internal(
+  createPlantIdClassificationUC,
+  name: r'createPlantIdClassificationUCProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$createPlantIdClassificationUCHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef CreatePlantIdClassificationUCRef
+    = AutoDisposeProviderRef<CreatePlantIdClassificationUC>;
+String _$getPlantIdPlantUCHash() => r'd1f1bff8c3176d9f6d6ac079ae000f2a936e256d';
+
+/// See also [getPlantIdPlantUC].
+@ProviderFor(getPlantIdPlantUC)
+final getPlantIdPlantUCProvider =
+    AutoDisposeProvider<GetPlantIdPlantUC>.internal(
+  getPlantIdPlantUC,
+  name: r'getPlantIdPlantUCProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$getPlantIdPlantUCHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef GetPlantIdPlantUCRef = AutoDisposeProviderRef<GetPlantIdPlantUC>;
+String _$deletePlantIdPlantUCHash() =>
+    r'2910ef19b969c02abbc62a2136437e3c097f8ffa';
+
+/// See also [deletePlantIdPlantUC].
+@ProviderFor(deletePlantIdPlantUC)
+final deletePlantIdPlantUCProvider =
+    AutoDisposeProvider<DeletePlantIdPlantUC>.internal(
+  deletePlantIdPlantUC,
+  name: r'deletePlantIdPlantUCProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$deletePlantIdPlantUCHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef DeletePlantIdPlantUCRef = AutoDisposeProviderRef<DeletePlantIdPlantUC>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

@@ -4,8 +4,9 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'plant_net_api.g.dart';
+
 @riverpod
-PlantNetAPI plantNetApi (PlantNetApiRef ref) {
+PlantNetAPI plantNetApi(PlantNetApiRef ref) {
   return PlantNetAPI(ref: ref);
 }
 

@@ -65,5 +65,19 @@ final waqiDSProvider = AutoDisposeProvider<WaqiDS>.internal(
 );
 
 typedef WaqiDSRef = AutoDisposeProviderRef<WaqiDS>;
+String _$plantIdDsHash() => r'd5d247795956e84cc742fcdc8391030132ba81c0';
+
+/// See also [plantIdDs].
+@ProviderFor(plantIdDs)
+final plantIdDsProvider = AutoDisposeProvider<PlantIdDS>.internal(
+  plantIdDs,
+  name: r'plantIdDsProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$plantIdDsHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef PlantIdDsRef = AutoDisposeProviderRef<PlantIdDS>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

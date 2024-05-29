@@ -36,13 +36,22 @@ class AppRouter extends $AppRouter {
             AutoRoute(
               page: SearchRoute.page,
             ),
+            AutoRoute(
+              page: PlantHistoryRoute.page,
+            ),
           ],
         ),
         AutoRoute(
-          page: SearchResultsRoute.page,
+          page: SearchResultsServer1Route.page,
         ),
         AutoRoute(
-          page: PlantDetailRoute.page,
+          page: SearchResultsServer2Route.page,
+        ),
+        AutoRoute(
+          page: PlantDetailServer1Route.page,
+        ),
+        AutoRoute(
+          page: PlantDetailServer2Route.page,
         ),
       ];
 }

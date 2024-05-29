@@ -24,6 +24,8 @@ mixin _$SearchState {
   XFile? get capturedImage => throw _privateConstructorUsedError;
   String? get type => throw _privateConstructorUsedError;
   List<ScanResultEntity> get results => throw _privateConstructorUsedError;
+  int? get server => throw _privateConstructorUsedError;
+  PlantIdPlantData? get server1PlantData => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -42,7 +44,11 @@ abstract class $SearchStateCopyWith<$Res> {
           fromJson: SearchState.xFileFromJson, toJson: SearchState.xFileToJson)
       XFile? capturedImage,
       String? type,
-      List<ScanResultEntity> results});
+      List<ScanResultEntity> results,
+      int? server,
+      PlantIdPlantData? server1PlantData});
+
+  $PlantIdPlantDataCopyWith<$Res>? get server1PlantData;
 }
 
 /// @nodoc
@@ -61,6 +67,8 @@ class _$SearchStateCopyWithImpl<$Res, $Val extends SearchState>
     Object? capturedImage = freezed,
     Object? type = freezed,
     Object? results = null,
+    Object? server = freezed,
+    Object? server1PlantData = freezed,
   }) {
     return _then(_value.copyWith(
       capturedImage: freezed == capturedImage
@@ -75,7 +83,27 @@ class _$SearchStateCopyWithImpl<$Res, $Val extends SearchState>
           ? _value.results
           : results // ignore: cast_nullable_to_non_nullable
               as List<ScanResultEntity>,
+      server: freezed == server
+          ? _value.server
+          : server // ignore: cast_nullable_to_non_nullable
+              as int?,
+      server1PlantData: freezed == server1PlantData
+          ? _value.server1PlantData
+          : server1PlantData // ignore: cast_nullable_to_non_nullable
+              as PlantIdPlantData?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $PlantIdPlantDataCopyWith<$Res>? get server1PlantData {
+    if (_value.server1PlantData == null) {
+      return null;
+    }
+
+    return $PlantIdPlantDataCopyWith<$Res>(_value.server1PlantData!, (value) {
+      return _then(_value.copyWith(server1PlantData: value) as $Val);
+    });
   }
 }
 
@@ -92,7 +120,12 @@ abstract class _$$SearchStateImplCopyWith<$Res>
           fromJson: SearchState.xFileFromJson, toJson: SearchState.xFileToJson)
       XFile? capturedImage,
       String? type,
-      List<ScanResultEntity> results});
+      List<ScanResultEntity> results,
+      int? server,
+      PlantIdPlantData? server1PlantData});
+
+  @override
+  $PlantIdPlantDataCopyWith<$Res>? get server1PlantData;
 }
 
 /// @nodoc
@@ -109,6 +142,8 @@ class __$$SearchStateImplCopyWithImpl<$Res>
     Object? capturedImage = freezed,
     Object? type = freezed,
     Object? results = null,
+    Object? server = freezed,
+    Object? server1PlantData = freezed,
   }) {
     return _then(_$SearchStateImpl(
       capturedImage: freezed == capturedImage
@@ -123,6 +158,14 @@ class __$$SearchStateImplCopyWithImpl<$Res>
           ? _value._results
           : results // ignore: cast_nullable_to_non_nullable
               as List<ScanResultEntity>,
+      server: freezed == server
+          ? _value.server
+          : server // ignore: cast_nullable_to_non_nullable
+              as int?,
+      server1PlantData: freezed == server1PlantData
+          ? _value.server1PlantData
+          : server1PlantData // ignore: cast_nullable_to_non_nullable
+              as PlantIdPlantData?,
     ));
   }
 }
@@ -135,7 +178,9 @@ class _$SearchStateImpl implements _SearchState {
           fromJson: SearchState.xFileFromJson, toJson: SearchState.xFileToJson)
       this.capturedImage,
       this.type,
-      required final List<ScanResultEntity> results})
+      required final List<ScanResultEntity> results,
+      this.server,
+      this.server1PlantData})
       : _results = results;
 
   factory _$SearchStateImpl.fromJson(Map<String, dynamic> json) =>
@@ -155,8 +200,13 @@ class _$SearchStateImpl implements _SearchState {
   }
 
   @override
+  final int? server;
+  @override
+  final PlantIdPlantData? server1PlantData;
+
+  @override
   String toString() {
-    return 'SearchState(capturedImage: $capturedImage, type: $type, results: $results)';
+    return 'SearchState(capturedImage: $capturedImage, type: $type, results: $results, server: $server, server1PlantData: $server1PlantData)';
   }
 
   @override
@@ -167,13 +217,16 @@ class _$SearchStateImpl implements _SearchState {
             (identical(other.capturedImage, capturedImage) ||
                 other.capturedImage == capturedImage) &&
             (identical(other.type, type) || other.type == type) &&
-            const DeepCollectionEquality().equals(other._results, _results));
+            const DeepCollectionEquality().equals(other._results, _results) &&
+            (identical(other.server, server) || other.server == server) &&
+            (identical(other.server1PlantData, server1PlantData) ||
+                other.server1PlantData == server1PlantData));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, capturedImage, type,
-      const DeepCollectionEquality().hash(_results));
+      const DeepCollectionEquality().hash(_results), server, server1PlantData);
 
   @JsonKey(ignore: true)
   @override
@@ -195,7 +248,9 @@ abstract class _SearchState implements SearchState {
           fromJson: SearchState.xFileFromJson, toJson: SearchState.xFileToJson)
       final XFile? capturedImage,
       final String? type,
-      required final List<ScanResultEntity> results}) = _$SearchStateImpl;
+      required final List<ScanResultEntity> results,
+      final int? server,
+      final PlantIdPlantData? server1PlantData}) = _$SearchStateImpl;
 
   factory _SearchState.fromJson(Map<String, dynamic> json) =
       _$SearchStateImpl.fromJson;
@@ -207,6 +262,10 @@ abstract class _SearchState implements SearchState {
   String? get type;
   @override
   List<ScanResultEntity> get results;
+  @override
+  int? get server;
+  @override
+  PlantIdPlantData? get server1PlantData;
   @override
   @JsonKey(ignore: true)
   _$$SearchStateImplCopyWith<_$SearchStateImpl> get copyWith =>

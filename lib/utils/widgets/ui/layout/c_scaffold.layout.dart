@@ -57,45 +57,49 @@ class CScaffold extends StatelessWidget {
                 borderRadius: BorderRadius.circular(100.r),
               ),
               child: GNav(
-                  selectedIndex: tabsRouter!.activeIndex,
-                  onTabChange: tabsRouter!.setActiveIndex,
-                  // haptic feedback
-                  backgroundColor: palette?.secondary ?? Colors.white,
-                  color: palette?.primary,
+                selectedIndex: tabsRouter!.activeIndex,
+                onTabChange: tabsRouter!.setActiveIndex,
+                // haptic feedback
+                backgroundColor: palette?.secondary ?? Colors.white,
+                color: palette?.primary,
 
-                  // elevation: 0,
-                  // selectedLabelStyle: typography?.body1Medium,
-                  iconSize: 24.sp,
-                  tabBackgroundColor: palette?.primary ?? Colors.black,
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
-                  gap: 8.w,
-                  activeColor: palette?.secondary,
-                  tabBorderRadius: 24.r,
-                  textStyle: typography?.body2Bold?.copyWith(
-                    color: palette?.secondary,
+                // elevation: 0,
+                // selectedLabelStyle: typography?.body1Medium,
+                iconSize: 24.sp,
+                tabBackgroundColor: palette?.primary ?? Colors.black,
+                padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
+                gap: 4.w,
+                activeColor: palette?.secondary,
+                tabBorderRadius: 24.r,
+                textStyle: typography?.body2Bold?.copyWith(
+                  color: palette?.secondary,
+                ),
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                // navigation bar padding
+
+                tabs: [
+                  GButton(
+                    icon: Icons.home,
+                    text: 'Home',
                   ),
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  // navigation bar padding
-
-                  tabs: [
-                    GButton(
-                      icon: Icons.home,
-                      text: 'Home',
-                    ),
-                    GButton(
-                      icon: Icons.search,
-                      text: 'Search',
-                    ),
-                    GButton(
-                      icon: Icons.explore,
-                      text: 'Explore',
-                    ),
-                    GButton(
-                      icon: Icons.info,
-                      text: 'Info',
-                    )
-                  ]),
+                  GButton(
+                    icon: Icons.search,
+                    text: 'Search',
+                  ),
+                  GButton(
+                    icon: Icons.history,
+                    text: 'History',
+                  ),
+                  GButton(
+                    icon: Icons.explore,
+                    text: 'Explore',
+                  ),
+                  GButton(
+                    icon: Icons.info,
+                    text: 'Info',
+                  )
+                ],
+              ),
             )
           : null,
     );
