@@ -9,12 +9,10 @@ class WaqiDS {
 
   TaskEither<AppException, int> getAirQualityIndex(String city) {
     return TaskEither.tryCatch(() async {
-      final response = await _dio.get("/$city", queryParameters: {
-        "city": city,
-      });
+      final response = await _dio.get("/$city");
 
       final index = response.data["data"]["aqi"];
-
+      if (index is! int) return 0;
       return index;
     }, (error, stackTrace) {
       if (error is DioException) {
