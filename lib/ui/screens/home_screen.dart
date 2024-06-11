@@ -36,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: _bottomNavIndex == 0 // Show app bar only for the ExplorePage
           ? AppBar(
               centerTitle: true,
-              backgroundColor: const Color(0xf99A78E),
+              backgroundColor: const Color(0x0f99a78e),
               shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.vertical(
                   bottom: Radius.circular(20),

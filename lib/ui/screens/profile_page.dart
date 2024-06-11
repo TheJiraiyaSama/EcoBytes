@@ -52,6 +52,11 @@ class _ProfilePageState extends State<ProfilePage> {
                     role: '1BY20CS182',
                     bio: '',
                   ),
+                  _buildProfileCard(
+                    name: 'SC Arham',
+                    role: 'Honorable Mention',
+                    bio: '',
+                  ),
                 ],
               ),
             ),
